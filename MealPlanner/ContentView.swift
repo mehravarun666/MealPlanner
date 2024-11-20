@@ -16,37 +16,41 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()
+                    .multilineTextAlignment(.center) // Align text in the center
                     .foregroundColor(.primary)
                 
                 Text("Plan your meals, find new recipes, and create shopping lists.")
                     .font(.body)
                     .padding(.bottom)
+                    .multilineTextAlignment(.center) // Align text in the center
                     .foregroundColor(.secondary)
                 
-                // Meal Planner, Recipe Finder, and Shopping List buttons
-                HStack {
-                    NavigationLink(destination: MealPlannerView()) {
-                        HomeButtonView(title: "Meal Planner", imageName: "calendar")
+                // Navigation Buttons for Meal Planner, Recipe Finder, Shopping List, and Favorites
+                VStack(spacing: 16) { // Add vertical spacing between button rows
+                    HStack(spacing: 16) { // Add horizontal spacing between buttons
+                        NavigationLink(destination: MealPlannerView()) {
+                            HomeButtonView(title: "Meal Planner", imageName: "calendar")
+                        }
+                        
+                        NavigationLink(destination: RecipeFinderView()) {
+                            HomeButtonView(title: "Recipe Finder", imageName: "magnifyingglass")
+                        }
                     }
                     
-                    NavigationLink(destination: RecipeFinderView()) {
-                        HomeButtonView(title: "Recipe Finder", imageName: "magnifyingglass")
-                    }
-                }
-                .padding()
-
-                HStack {
-                    NavigationLink(destination: ShoppingListView()) {
-                        HomeButtonView(title: "Shopping List", imageName: "cart")
-                    }
-                    
-                    NavigationLink(destination: FavoritesView()) {
-                        HomeButtonView(title: "Favorites", imageName: "star.fill")
+                    HStack(spacing: 16) { // Add horizontal spacing between buttons
+                        NavigationLink(destination: ShoppingListView()) {
+                            HomeButtonView(title: "Shopping List", imageName: "cart")
+                        }
+                        
+                        NavigationLink(destination: FavoritesView()) {
+                            HomeButtonView(title: "Favorites", imageName: "star.fill")
+                        }
                     }
                 }
                 .padding()
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .padding() // Add padding around the entire VStack
+            .navigationBarTitle("Home", displayMode: .inline) // Add a title for NavigationView
         }
     }
 }
@@ -69,42 +73,15 @@ struct HomeButtonView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(RoundedRectangle(cornerRadius: 12).strokeBorder(Color.blue, lineWidth: 2))
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(Color.blue, lineWidth: 2)
+        )
     }
 }
 
-// Placeholder Views for navigation (Meal Planner, Recipe Finder, Shopping List)
-struct MealPlannerView: View {
-    var body: some View {
-        Text("Meal Planner View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
-    }
-}
+// Placeholder Views for Navigation (Meal Planner, Recipe Finder, Shopping List, Favorites)
 
-struct RecipeFinderView: View {
-    var body: some View {
-        Text("Recipe Finder View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
-    }
-}
-
-struct ShoppingListView: View {
-    var body: some View {
-        Text("Shopping List View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
-    }
-}
-
-struct FavoritesView: View {
-    var body: some View {
-        Text("Favorites View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
-    }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
